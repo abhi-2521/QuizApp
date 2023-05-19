@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 public class splashscreen extends AppCompatActivity {
 
@@ -12,20 +13,31 @@ public class splashscreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
         getSupportActionBar().hide();
-        Thread thread=new Thread(){
+        Handler handler;
+        handler=new Handler();
+        int time=3000;
+        Runnable runnable=new Runnable() {
             @Override
             public void run() {
-                try {
-                    sleep(2200);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                finally {
-                    Intent intent=new Intent(splashscreen.this,MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+                Intent intent=new Intent(splashscreen.this,MainActivity.class);
+                startActivity(intent);
+                finish();
             }
-        };thread.start();
+        };
+        handler.postDelayed(runnable,time);
+//        Thread thread=new Thread(){
+//            @Override
+//            public void run() {
+//                try {
+//                    sleep(2200);
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
+//                finally {
+//
+//                }
+//            }
+//        };thread.start();
+
     }
 }
